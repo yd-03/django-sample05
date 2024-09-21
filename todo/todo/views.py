@@ -18,3 +18,9 @@ class TodoUpdate(generic.UpdateView):
     model = TodoModel
     fields = ("title", "content", "deadline")
     success_url = reverse_lazy("list")
+
+
+class TodoDelete(generic.DeleteView):
+    template_name = "todo/delete.html"
+    model = TodoModel
+    success_url = reverse_lazy("list")
