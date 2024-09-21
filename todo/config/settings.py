@@ -30,6 +30,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
 ]
 
 MIDDLEWARE = [
@@ -40,6 +44,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -111,3 +116,34 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+# sitesフレームワーク用のサイトID
+SITE_ID = 1
+
+# 認証バックエンドを設定
+AUTHENTICATION_BACKENDS = (
+    "allauth.account.auth_backends.AuthenticationBackend",
+    "django.contrib.auth.backends.ModelBackend",
+)
+
+# 認証方式を 「メールアドレスとパスワード」 に変更
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+
+# ユーザー名は使用しない
+ACCOUNT_USERNAME_REQUIRED = False
+
+# ユーザー登録確認メールは送信しない
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+
+# メールアドレスを必須項目にする
+ACCOUNT_EMAIL_REQUIRED = True
+
+# ログイン時のリダイレクト先
+LOGIN_REDIRECT_URL = "todo:todo_list"
+
+# ログアウト時のリダイレクト先
+ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/login/"
+ACCOUNT_LOGOUT_ON_GET = True
+
+# メール送信の設定
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
