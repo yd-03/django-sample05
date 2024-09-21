@@ -14,16 +14,16 @@
 </div>
 <div class="container ">
     <div>
-        <p class="new-btn"><a href="{% url 'create' %}" class="btn btn-success btn-lg" tabindex="-1" role="button" aria-disabled="true">新規作成</a></p>
+        <p class="new-btn"><a href="{% url 'todo:todo_create' %}" class="btn btn-success btn-lg" tabindex="-1" role="button" aria-disabled="true">新規作成</a></p>
     </div>
-    {% for list in object_list %}
+    {% for todo in todos %}
         <div class="one_box">
-            <h1>{{ list.title }}</h1>
-            <h4>{{ list.deadline }}</h4>
+            <h1>{{ todo.title }}</h1>
+            <h4>{{ todo.deadline }}</h4>
             <div class="btns">
-                <p class="btn-content"><a href="{% url 'detail' list.pk %}" class="btn btn-primary "tabindex="-1" role="button" aria-disabled="true">詳細</a></p>
-                <p class="btn-content"><a href="{% url 'update' list.pk %}" class="btn btn-info" tabindex="-1" role="button" aria-disabled="true">編集</a></p>
-                <p class="btn-content"><a href="{% url 'delete' list.pk %}" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="true">削除</a></p>
+                <p class="btn-content"><a href="{% url 'todo:todo_detail' todo.pk %}" class="btn btn-primary "tabindex="-1" role="button" aria-disabled="true">詳細</a></p>
+                <p class="btn-content"><a href="{% url 'todo:todo_update' todo.pk %}" class="btn btn-info" tabindex="-1" role="button" aria-disabled="true">編集</a></p>
+                <p class="btn-content"><a href="{% url 'todo:todo_delete' todo.pk %}" class="btn btn-danger" tabindex="-1" role="button" aria-disabled="true">削除</a></p>
             </div>
         </div>
     <hr>
