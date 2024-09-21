@@ -17,6 +17,9 @@
         <div class="one_box">
             <h1>{{ list.title }}</h1>
             <h4>{{ list.deadline }}</h4>
+            <div class="btns">
+                <p class="btn-content"><a href="{% url 'detail' list.pk %}" class="btn btn-primary "tabindex="-1" role="button" aria-disabled="true">詳細</a></p>
+            </div>
         </div>
     <hr>
     {% endfor %}
