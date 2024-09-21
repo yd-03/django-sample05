@@ -24,3 +24,10 @@ class TodoDelete(generic.DeleteView):
     template_name = "todo/delete.html"
     model = TodoModel
     success_url = reverse_lazy("list")
+
+
+class TodoCreate(generic.CreateView):
+    template_name = "todo/create.html"
+    model = TodoModel
+    fields = ("title", "content", "deadline")
+    success_url = reverse_lazy("list")
