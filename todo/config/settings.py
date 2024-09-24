@@ -23,6 +23,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "upload_app",
     "todo.apps.TodoConfig",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -147,3 +148,6 @@ ACCOUNT_LOGOUT_ON_GET = True
 
 # メール送信の設定
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# メディアファイルの設定
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
