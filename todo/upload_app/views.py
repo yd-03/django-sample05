@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .forms import UploadForm
+from .forms import UploadForm, SettingForm
 from .models import UploadImage
 
 
@@ -27,3 +27,33 @@ def preview(request, image_id=0):
     }
 
     return render(request, "upload_app/preview.html", params)
+
+
+def transform(request, image_id=0):
+    upload_image = get_object_or_404(UploadImage, id=image_id)
+
+    if request.method == "POST":
+        form = SettingForm(request.POST)
+        if form.is_valid():
+            angle = form.cleaned_data.get("angle")
+            gray = form.cleaned_data.get("gray")
+            upload_image.transform(angle, gray)
+            params = {
+                "title": "画像処理",
+                "id": upload_image.id,
+                "setting_form": form,
+                "original_url": upload_image.image.url,
+                "result_url": upload_image.result.url,
+            }
+
+            return render(request, "upload_app/transform.html", params)
+
+    params = {
+        "title": "画像処理",
+        "id": upload_image.id,
+        "setting_form": SettingForm({"angle": 0, "gray": False}),
+        "original_url": upload_image.image.url,
+        "result_url": "",
+    }
+
+    return render(request, "upload_app/transform.html", params)
