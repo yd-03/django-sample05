@@ -18,13 +18,26 @@ def index(request):
 
 
 def preview(request, image_id=0):
+    # インスタンスの取得
     upload_image = get_object_or_404(UploadImage, id=image_id)
 
-    params = {
-        "title": "画像の表示",
-        "id": upload_image.id,
-        "url": upload_image.image.url,
-    }
+    # POSTメソッドの場合
+    if request.method == "POST":
+        delete(image_id)
+        params = {
+            "title": "画像を削除しました",
+            "id": image_id,
+            "url": None,
+        }
+        return render(request, "upload_app/preview.html", params)
+
+    # それ以外の場合
+    else:
+        params = {
+            "title": "画像の表示",
+            "id": upload_image.id,
+            "url": upload_image.image.url,
+        }
 
     return render(request, "upload_app/preview.html", params)
 
@@ -57,3 +70,9 @@ def transform(request, image_id=0):
     }
 
     return render(request, "upload_app/transform.html", params)
+
+
+def delete(image_id=0):
+    upload_image = get_object_or_404(UploadImage, id=image_id)
+    upload_image.image.delete()
+    upload_image.delete()

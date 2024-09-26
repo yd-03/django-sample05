@@ -8,7 +8,15 @@
     <h1>{{title}}</h1>
     <div>
         <h2>ID:{{id}}の画像</h2>
+        {% if url is not None %}
         <img src="{{url}}">
+        <form action="{% url 'preview' id %}" method="post">
+            {% csrf_token %}
+            <p><input type="submit" value="削除"></p>
+        </form>
+        {% else %}
+        <p>ID:{{id}}の画像は削除されました...</p>
+        {% endif %}
     </div>
 </body>
 </html>
