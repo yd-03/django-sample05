@@ -23,6 +23,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "footprints",
     "upload_app",
     "todo.apps.TodoConfig",
     "django.contrib.admin",
@@ -138,6 +139,9 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 # メールアドレスを必須項目にする
 ACCOUNT_EMAIL_REQUIRED = True
+
+# ログインページのURL
+LOGIN_URL = "/footprints/login/"
 
 # ログイン時のリダイレクト先
 LOGIN_REDIRECT_URL = "todo:todo_list"
