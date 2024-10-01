@@ -1,0 +1,29 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>他のユーザー</title>
+</head>
+<body>
+    <h1>他のユーザー</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ユーザー</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for other in others %}
+            <tr>
+                <td><a href="{% url 'other' other.id %}">{{other.username}}</a></td>
+            </tr>
+        {% empty %}
+            <tr><td>他のユーザーがいません...</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <p><a href="{% url 'user'%}">あなたの情報</a></p>
+    <p><a href="{% url 'logout'%}">ログアウト</a></p>
+</body>
+</html>

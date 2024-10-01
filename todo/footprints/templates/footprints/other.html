@@ -1,0 +1,33 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>{{other.username}}の情報</title>
+</head>
+<body>
+    <h1>{{other.username}}の情報</h1>
+    <h2>{{other.username}}</h2>
+    <p>連絡先：{{other.email}}</p>
+    <h1>{{other.username}}への足跡</h1>
+    <table class="table-list">
+        <thead>
+            <tr>
+                <th>ユーザー</th><th>日付</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for footprint in footprints %}
+            <tr>
+                <td><a href="{% url 'other' footprint.src.id %}">{{footprint.src.username}}</a></td>
+                <td>{{footprint.date|date:"m/d H:i"}}</td>
+            </tr>
+        {% empty %}
+            <tr><td>足跡がありません...</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <p><a href="{% url 'user'%}">あなたの情報</a></p>
+    <p><a href="{% url 'logout'%}">ログアウト</a></p>
+</body>
+</html>
